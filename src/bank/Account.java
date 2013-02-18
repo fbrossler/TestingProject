@@ -1,4 +1,5 @@
 package bank;
+
 /**
  * 
  */
@@ -16,6 +17,11 @@ public class Account {
 	public Account() {
 		this.owner = NO_OWNER;
 		this.balance = DEFAULT_BALACE;
+	}
+
+	public Account(String accountOwner, double accountBalance) {
+		this.owner = accountOwner;
+		this.balance = accountBalance;
 	}
 
 	public double getBalance() {
