@@ -9,8 +9,8 @@ package bank;
  * 
  */
 public class Account {
-	private static final String NO_OWNER = "No Owner";
-	private static final double DEFAULT_BALACE = 0.0;
+	protected static final String NO_OWNER = "No Owner";
+	protected static final double DEFAULT_BALACE = 0.0;
 	private double balance;
 	private final String owner;
 
