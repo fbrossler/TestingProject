@@ -6,6 +6,7 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
+<property name="test.reports" value="reports"/>
 
   <target name="init">
     <!-- Create the time stamp -->
@@ -28,6 +29,22 @@
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
     <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
   </target>
+
+	<target name="test" depends="compile" description="JUnit-Tests durchführen">
+		<delete dir="${test.reports}"/>
+		<mkdir dir="${test.reports}"/>
+		<junit printsummary="yes" fork="yes" haltonfailure="no">        
+	        <classpath location="${build}" />       
+	        <formatter type="xml" />
+
+	        <batchtest todir="${test.reports}">
+	            <fileset dir="${test}"> 
+	                <include name="**/*Test.java" /> 
+	            </fileset>
+	        </batchtest>
+	    </junit>
+	    <echo message="Fertig, Testergebnisse im Verzeichnis ${test.reports}" />
+	</target>
 
   <target name="clean"
         description="clean up" >
