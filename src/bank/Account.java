@@ -20,8 +20,12 @@ public class Account {
 	}
 
 	public Account(String accountOwner, double accountBalance) {
-		this.owner = accountOwner;
-		this.balance = accountBalance;
+		if (accountOwner == null) {
+			this.owner = NO_OWNER;
+		} else {
+			this.owner = accountOwner;
+			this.balance = accountBalance;
+		}
 	}
 
 	public double getBalance() {
@@ -36,12 +40,15 @@ public class Account {
 		if (money >= 0.0) {
 			this.balance += money;
 		} else {
-
+			throw new RuntimeException();
 		}
 	}
 
 	public void withdraw(double money) {
-		if (money > 0.0) {
+		if (money > getBalance()) {
+			throw new RuntimeException();
+		}
+		if (money >= 0.0) {
 			this.balance -= money;
 		}
 	}
