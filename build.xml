@@ -6,8 +6,7 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
-<property name="test.reports" location="reports"/>
-<property name="tests" location="test"/>
+
 
   <target name="init">
     <!-- Create the time stamp -->
