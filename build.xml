@@ -7,6 +7,7 @@
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
 <property name="test.reports" location="reports"/>
+<property name="tests" location="test"/>
 
   <target name="init">
     <!-- Create the time stamp -->
@@ -34,7 +35,7 @@
 		<delete dir="${test.reports}"/>
 		<mkdir dir="${test.reports}"/>
 		<junit printsummary="yes" fork="yes" haltonfailure="no">        
-	        <classpath location="${build}" />       
+	        <classpath location="${tests}" />       
 	        <formatter type="xml" />
 
 	        <batchtest todir="${test.reports}">
