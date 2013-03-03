@@ -37,7 +37,7 @@
 		<mkdir dir="${test.reports}"/>    
 		<junit printsummary="yes" haltonfailure="no" fork="yes">
 			<classpath location="${junit.jar}"/>
-			<formatter type="xml"
+			<formatter type="xml"/>
 			
 			<bachtest todir="${test.reports}">
 				<fileset dir="${test.classes}">
