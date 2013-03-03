@@ -39,7 +39,7 @@
 			<classpath location="${junit.jar}"/>
 			<formatter type="xml"/>
 			
-			<bachtest todir="${test.reports}">
+			<batchtest todir="${test.reports}">
 				<fileset dir="${test.classes}">
 					<include name="**/*Test.java"/>
 				</fileset>
