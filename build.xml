@@ -37,7 +37,7 @@
 			<classpath location="${test.classes}"/>
 			<formatter type="xml"/>
 			
-			<batchtest todir="${test.reports}">
+			<batchtest todir="${test.classes}">
 				<fileset dir="${test.classes}">
 					<include name="**/*Test.java"/>
 				</fileset>
