@@ -9,7 +9,7 @@
 	<property name="build" location="build"/>
 	<property name="dist"  location="dist"/>
 	<property name="test.reports" value="reports"/>
-	<property name="test.classes" location="src"/>
+	<property name="test.classes" location="build"/>
 
 	<target name="init">
  		<!-- Create the time stamp -->
