@@ -36,7 +36,7 @@
 		<delete dir="${test.reports}"/>
 		<mkdir dir="${test.reports}"/>    
 		<junit printsummary="yes" haltonfailure="no" fork="yes">
-			<classpath location="${junit.jar}"/>
+			<classpath location="${test.classes}"/>
 			<formatter type="xml"/>
 			
 			<batchtest todir="${test.reports}">
