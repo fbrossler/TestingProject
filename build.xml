@@ -37,13 +37,12 @@
 			<classpath location="${test.classes}"/>
 			<formatter type="xml"/>
 			
-			<batchtest todir="${test.classes}">
+			<batchtest todir="${test.reports}">
 				<fileset dir="${test.classes}">
 					<include name="**/*Test.java"/>
 				</fileset>
 			</batchtest>
 		</junit>
-		<echo message="Done, Testcases results in directory ${test.reports}"/>
 	</target>
 	
 	<target name="clean" description="clean up" >
