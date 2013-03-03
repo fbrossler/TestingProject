@@ -9,9 +9,7 @@
 	<property name="build" location="build"/>
 	<property name="dist"  location="dist"/>
 	<property name="test.reports" value="reports"/>
-	<property name="test.classes" location="test"/>
-	<property name="junit.jar" location="test/lib/junit.jar"/>
-
+	<property name="test.classes" location="src"/>
 
 	<target name="init">
  		<!-- Create the time stamp -->
