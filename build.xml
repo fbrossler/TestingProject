@@ -2,48 +2,54 @@
     <description>
         simple example build file
     </description>
-  <!-- set global properties for this build -->
-  <property name="src" location="src"/>
-  <property name="build" location="build"/>
-  <property name="dist"  location="dist"/>
+  
+	<!-- set global properties for this build -->
+	
+	<property name="src" location="src"/>
+	<property name="build" location="build"/>
+	<property name="dist"  location="dist"/>
+	<property name="test.reports" value="reports"/>
+	<property name="test.classes" location="src/test"/>
+	<property name="junit.jar" location="src/test/lib/junit.jar"/>
 
 
-  <target name="init">
-    <!-- Create the time stamp -->
-    <tstamp/>
-    <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${build}"/>
-  </target>
+	<target name="init">
+ 		<!-- Create the time stamp -->
+    	<tstamp/>
+    	<!-- Create the build directory structure used by compile -->
+    	<mkdir dir="${build}"/>
+	</target>
 
-  <target name="compile" depends="init"
-        description="compile the source " >
-    <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}"/>
-  </target>
+  	<target name="compile" depends="init" description="compile the source " >
+	    <!-- Compile the java code from ${src} into ${build} -->
+	    <javac srcdir="${src}" destdir="${build}"/>
+	</target>
 
-  <target name="dist" depends="compile"
-        description="generate the distribution" >
-    <!-- Create the distribution directory -->
-    <mkdir dir="${dist}/lib"/>
+	<target name="dist" depends="compile" description="generate the distribution" >
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib"/>
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
+	</target>
 
-    <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
-  </target>
-
-	<target name="runTests" description="Run JUnit tests">
-	    <junit printsummary="yes" dir="test-classes" fork="true">
-	        <classpath>
-	            <pathelement location="inst-classes" />
-	        </classpath>
-	        <test name="xxx.AllNonGWTTestCaseTests" haltonfailure="no" outfile="result">
-	            <formatter type="xml" />
-	        </test>
-	    </junit>
-  </target>
-  <target name="clean"
-        description="clean up" >
-    <!-- Delete the ${build} and ${dist} directory trees -->
-    <delete dir="${build}"/>
-    <delete dir="${dist}"/>
-  </target>
+	<target name="runTests" description="Run JUnit tests" depends="compile">
+		<delete dir="${test.reports}"/>
+		<mkdir dir="${test.reports}"/>    
+		<junit printsummary="yes" haltonfailure="no" fork="yes">
+			<classpath location="${junit.jar}"/>
+			<formatter type="xml"
+			
+			<bachtest todir="${test.reports}">
+				<fileset dir="${test.classes}">
+					<include name="**/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<target name="clean" description="clean up" >
+	<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
 </project>
