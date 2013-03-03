@@ -45,6 +45,7 @@
 				</fileset>
 			</batchtest>
 		</junit>
+		<echo message="Done, Testcases results in directory ${test.reports}"/>
 	</target>
 	
 	<target name="clean" description="clean up" >
