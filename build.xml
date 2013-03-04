@@ -29,26 +29,6 @@
 		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
 		<jar jarfile="${dist}/lib/BankAccountApp-${DSTAMP}.jar" basedir="${build}"/>
 	</target>
-
-	<target name="runTests" description="Run JUnit tests" depends="compile">
-		<delete dir="${test.reports}"/>
-		<mkdir dir="${test.reports}"/>    
-		<junit printsummary="yes" haltonfailure="no" fork="yes">
-			<classpath location="${test.classes}"/>
-			<classpath>
-				<pathelement path="${classpath}"/>
-				<path location="lib/ant-junit.jar"/>
-				<path location="lib/junit.jar"/>
-			</classpath>
-			<formatter type="xml"/>
-			
-			<batchtest todir="${test.reports}">
-				<fileset dir="${test.reports}">
-					<include name="**/*Test.java"/>
-				</fileset>
-			</batchtest>
-		</junit>
-	</target>
 	
 	<target name="clean" description="clean up" >
 	<!-- Delete the ${build} and ${dist} directory trees -->
