@@ -37,8 +37,8 @@
 			<classpath location="${test.classes}"/>
 			<classpath>
 				<pathelement path="${classpath}"/>
-				<pathelement location="lib/ant-junit.jar"/>
-				<pathelement location="lib/junit.jar"/>
+				<path location="lib/ant-junit.jar"/>
+				<path location="lib/junit.jar"/>
 			</classpath>
 			<formatter type="xml"/>
 			
