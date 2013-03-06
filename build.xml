@@ -6,6 +6,7 @@
 	<!-- set global properties for this build -->
 	
 	<property name="src" location="src"/>
+	<property name="test.folder" location="test"/>
 	<property name="build" location="build"/>
 	<property name="dist"  location="dist"/>
 	<property name="test.reports" value="reports"/>
@@ -28,6 +29,18 @@
 		<mkdir dir="${dist}/lib"/>
 		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
 		<jar jarfile="${dist}/lib/BankAccountApp-${DSTAMP}.jar" basedir="${build}"/>
+	</target>
+	
+	<target name="test" depends="compile" description="J-Unit tests durchführen">
+	    <junit printsummary="true" fork="yes" haltonfailure="no">
+	        <classpath location="${build}"/>
+	        <formatter type="xml"/>
+	        <batchtest todir="${test.reports}">
+	            <fileset dir="${test.folder}">
+	                <include name="**/*Test.java"/>
+	            </fileset>
+	        </batchtest>
+	    </junit>
 	</target>
 	
 	<target name="clean" description="clean up" >
