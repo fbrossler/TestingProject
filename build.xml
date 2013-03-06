@@ -16,7 +16,7 @@
 	    <pathelement location="=./lib/junit.jar"/>
 	</path>
 	<path id="BankAccount.classpath">
-	    <pathelement location="bin/"/>
+	    <pathelement location="./"/>
 	    <path refid="JUnit classpath"/>
 	</path>
 	
