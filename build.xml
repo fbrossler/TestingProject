@@ -13,7 +13,7 @@
 	<property name="test.classes" location="build"/>
 
 	<path id="JUnit classpath">
-	    <pathelement location="=./lib/junit.jar"
+	    <pathelement location="=./lib/junit.jar"/>
 	</path>
 	<path id="BankAccount.classpath">
 	    <pathelement location="bin/"/>
