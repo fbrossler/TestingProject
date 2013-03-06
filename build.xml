@@ -12,6 +12,14 @@
 	<property name="test.reports" value="reports"/>
 	<property name="test.classes" location="build"/>
 
+	<path id="JUnit classpath">
+	    <pathelement location="=./lib/junit.jar"
+	</path>
+	<path id="BankAccount.classpath">
+	    <pathelement location="bin/"/>
+	    <path refid="JUnit classpath"/>
+	</path>
+	
 	<target name="init">
  		<!-- Create the time stamp -->
     	<tstamp/>
@@ -33,11 +41,7 @@
 	
 	<target name="test" depends="compile" description="J-Unit tests durchführen">
 	    <junit printsummary="true" fork="yes" haltonfailure="no">
-	        <classpath>
-	            <pathelement path="${classpath}"/>
-	            <pathelement location="lib/junit.jar"/>
-	            <pathelement location="lib/ant-junit.jar"/>
-	        </classpath>
+	         <classpath refid="BankAccount.classpath" />
 	        <formatter type="xml"/>
 	        <batchtest todir="${test.reports}">
 	            <fileset dir="${test.folder}">
