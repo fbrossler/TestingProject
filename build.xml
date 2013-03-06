@@ -11,12 +11,12 @@
 	<property name="dist"  location="dist"/>
 	<property name="test.reports" value="reports"/>
 	<property name="test.classes" location="build"/>
-
+<!-- 
 	<classpath>
 	    <pathelement path="${classpath}"/>
 	    <pathelement location ="./lib/junit.jar"/>
 	</classpath>
-	
+ -->	
 	<target name="init">
  		<!-- Create the time stamp -->
     	<tstamp/>
