@@ -33,7 +33,6 @@
 	
 	<target name="test" depends="compile" description="J-Unit tests durchführen">
 	    <junit printsummary="true" fork="yes" haltonfailure="no">
-	        <classpath location="${build}"/>
 	        <formatter type="xml"/>
 	        <batchtest todir="${test.reports}">
 	            <fileset dir="${test.folder}">
