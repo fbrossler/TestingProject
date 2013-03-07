@@ -18,6 +18,10 @@ public class Bank {
 
 	}
 
+	public int accountsAmount() {
+		return this.accounts.size();
+	}
+
 	public void openAccount(String owner, double balance) {
 		if (owner != null && balance >= 0) {
 			this.accounts.add(new Account(owner, balance,
