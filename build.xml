@@ -10,13 +10,9 @@
 	<property name="build" location="build"/>
 	<property name="dist"  location="dist"/>
 	<property name="test.reports" value="reports"/>
-	<property name="test.classes" location="build"/>
-<!-- 
-	<classpath>
-	    <pathelement path="${classpath}"/>
-	    <pathelement location ="./lib/junit.jar"/>
-	</classpath>
- -->	
+	
+	
+	
 	<target name="init">
  		<!-- Create the time stamp -->
     	<tstamp/>
@@ -38,6 +34,9 @@
 	
 	<target name="test" depends="compile" description="J-Unit tests durchführen">
 	    <junit printsummary="true" fork="yes" haltonfailure="no">
+	        <classpath>
+	    		<pathelement location ="lib/junit.jar"/>
+			</classpath>
 	        <formatter type="xml"/>
 	        <batchtest todir="${test.reports}">
 	            <fileset dir="${test.folder}">
