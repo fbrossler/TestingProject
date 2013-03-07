@@ -13,23 +13,29 @@ public class Account {
 	protected static final double DEFAULT_BALACE = 0.0;
 	private double balance;
 	private final String owner;
+	private int accountNumber;
 
 	public Account() {
 		this.owner = NO_OWNER;
 		this.balance = DEFAULT_BALACE;
 	}
 
-	public Account(String accountOwner, double accountBalance) {
+	public Account(String accountOwner, double accountBalance, int accountNumber) {
 		if (accountOwner == null) {
 			this.owner = NO_OWNER;
 		} else {
 			this.owner = accountOwner;
 			this.balance = accountBalance;
+			this.accountNumber = accountNumber;
 		}
 	}
 
 	public double getBalance() {
 		return balance;
+	}
+
+	public int getNumber() {
+		return accountNumber;
 	}
 
 	public String getOwner() {
