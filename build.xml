@@ -24,7 +24,6 @@
   	<target name="compile" depends="init" description="compile the source " >
 	    <!-- Compile the java code from ${src} into ${build} -->
 	    <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
-	    <javac srcdir="${test.folder}" destdir="${build}" includeantruntime="false"/>
 	</target>
 
 	<target name="dist" depends="compile" description="generate the distribution" >
@@ -38,6 +37,7 @@
 	    <junit printsummary="true" fork="no" haltonfailure="no">
 	        <classpath>
 	    		<pathelement location ="lib/junit.jar"/>
+	    		<pathelement location ="${test.folder}"/>
 			</classpath>
 	        <formatter type="xml"/>
 	        <batchtest todir="${test.reports}">
