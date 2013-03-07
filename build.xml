@@ -18,6 +18,7 @@
     	<tstamp/>
     	<!-- Create the build directory structure used by compile -->
     	<mkdir dir="${build}"/>
+    	<!-- Create the report directory for the result of junit -->
     	<mkdir dir="${test.reports}"/>
 	</target>
 
@@ -34,7 +35,7 @@
 	</target>
 	
 	<target name="test" depends="compile" description="J-Unit tests durchführen">
-	    <junit printsummary="true" fork="no" haltonfailure="no">
+	    <junit printsummary="true" fork="yes" haltonfailure="no">
 	        <classpath>
 	    		<pathelement location ="lib/junit.jar"/>
 	    		<pathelement location ="${test.folder}"/>
