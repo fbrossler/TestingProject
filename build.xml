@@ -12,19 +12,6 @@
 	<property name="test.reports" value="reports" />
 
 
-	<!-- set properties for emma -->
-	<property name="coverage.dir" value="${test.report}/coverage" />
-	<property name="emma.dir" value="/usr/bin/emma" />
-	<property name="src.dir" value="${src}" />
-	<property name="class.dir" value="${build}" />
-	<property name="instrumented.dir" value="inst/" />
-	<path id="emma.lib">
-		<fileset dir="${emma.dir}">
-			<include name="*.jar" />
-		</fileset>
-	</path>
-
-	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
 
 
 	<target name="init">
@@ -34,6 +21,7 @@
 		<mkdir dir="${build}" />
 		<!-- Create the report directory for the result of junit -->
 		<mkdir dir="${test.reports}" />
+		
 	</target>
 
 	<target name="compile" depends="init" description="compile the source ">
@@ -50,7 +38,7 @@
 		<jar jarfile="${dist}/lib/BankAccountApp-${DSTAMP}.jar" basedir="${build}" />
 	</target>
 
-	<target name="test" depends="emma" description="J-Unit tests durchführen">
+	<target name="test" depends="compile" description="J-Unit tests durchführen">
 		<junit printsummary="true" fork="yes" haltonfailure="no">
 			<classpath>
 				<pathelement location="lib/junit.jar" />
@@ -64,28 +52,6 @@
 				</fileset>
 			</batchtest>
 		</junit>
-	</target>
-
-	<target name="emma" depends="compile" description="emma code-coverage">
-		<emma enabled="true">
-			<instr instrpath="${class.dir}" destdir="${instrumented.dir}"
-				metadatafile="${coverage.dir}/metadata.emma" merge="true">
-				<filter excludes="au.com.jenisys.view.*" />
-			</instr>
-		</emma>
-
-	</target>
-
-	<target name="emma-report" depends="test" description="report emma">
-		<emma enabled="true">
-			<report sourcepath="${src.dir}">
-				<fileset dir="${coverage.dir}">
-					<include name="*.emma" />
-				</fileset>
-
-				<xml outfile="${coverage.dir}/coverage.xml" depth="method" />
-			</report>
-		</emma>
 	</target>
 
 	<target name="clean" description="clean up">
