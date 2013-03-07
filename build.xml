@@ -40,6 +40,7 @@
 	        <classpath>
 	    		<pathelement location ="lib/junit.jar"/>
 	    		<pathelement location ="${test.folder}"/>
+	    		<pathelement location ="${build}"/>
 			</classpath>
 	        <formatter type="xml"/>
 	        <batchtest todir="${test.reports}">
