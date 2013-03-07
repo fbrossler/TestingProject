@@ -34,7 +34,7 @@
 	</target>
 	
 	<target name="test" depends="compile" description="J-Unit tests durchführen">
-	    <junit printsummary="true" fork="yes" haltonfailure="no">
+	    <junit printsummary="true" fork="no" haltonfailure="no">
 	        <classpath>
 	    		<pathelement location ="lib/junit.jar"/>
 			</classpath>
