@@ -1,60 +1,97 @@
 <project name="Bank" default="dist" basedir=".">
-    <description>
-        simple example build file
-    </description>
-  
+	<description>
+		simple example build file
+	</description>
+
 	<!-- set global properties for this build -->
-	
-	<property name="src" location="src"/>
-	<property name="test.folder" location="test"/>
-	<property name="build" location="build"/>
-	<property name="dist"  location="dist"/>
-	<property name="test.reports" value="reports"/>
-	
-	
-	
+
+	<property name="src" location="src" />
+	<property name="test.folder" location="test" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="test.reports" value="reports" />
+
+
+	<!-- set properties for emma -->
+	<property name="coverage.dir" value="${test.report}/coverage" />
+	<property name="emma.dir" value="/usr/bin/emma" />
+	<property name="src.dir" value="${src}" />
+	<property name="class.dir" value="${build}" />
+	<property name="instrumented.dir" value="inst/" />
+	<path id="emma.lib">
+		<fileset dir="${emma.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+
+
 	<target name="init">
- 		<!-- Create the time stamp -->
-    	<tstamp/>
-    	<!-- Create the build directory structure used by compile -->
-    	<mkdir dir="${build}"/>
-    	<!-- Create the report directory for the result of junit -->
-    	<mkdir dir="${test.reports}"/>
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+		<!-- Create the report directory for the result of junit -->
+		<mkdir dir="${test.reports}" />
 	</target>
 
-  	<target name="compile" depends="init" description="compile the source " >
-	    <!-- Compile the java code from ${src} into ${build} -->
-	    <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
-	    <javac srcdir="${test.folder}" destdir="${build}" includeantruntime="false" classpath="lib/junit.jar"/>
+	<target name="compile" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src}" destdir="${build}" includeantruntime="false" />
+		<javac srcdir="${test.folder}" destdir="${build}"
+			includeantruntime="false" classpath="lib/junit.jar" />
 	</target>
 
-	<target name="dist" depends="compile" description="generate the distribution" >
+	<target name="dist" depends="compile" description="generate the distribution">
 		<!-- Create the distribution directory -->
-		<mkdir dir="${dist}/lib"/>
+		<mkdir dir="${dist}/lib" />
 		<!-- Put everything from ${build} into the MyProject-${DSTAMP}.jar file -->
-		<jar jarfile="${dist}/lib/BankAccountApp-${DSTAMP}.jar" basedir="${build}"/>
+		<jar jarfile="${dist}/lib/BankAccountApp-${DSTAMP}.jar" basedir="${build}" />
 	</target>
-	
-	<target name="test" depends="compile" description="J-Unit tests durchführen">
-	    <junit printsummary="true" fork="yes" haltonfailure="no">
-	        <classpath>
-	    		<pathelement location ="lib/junit.jar"/>
-	    		<pathelement location ="${test.folder}"/>
-	    		<pathelement location ="${build}"/>
+
+	<target name="test" depends="emma" description="J-Unit tests durchführen">
+		<junit printsummary="true" fork="yes" haltonfailure="no">
+			<classpath>
+				<pathelement location="lib/junit.jar" />
+				<pathelement location="${test.folder}" />
+				<pathelement location="${build}" />
 			</classpath>
-	        <formatter type="xml"/>
-	        <batchtest todir="${test.reports}">
-	            <fileset dir="${test.folder}">
-	                <include name="**/*Test.java"/>
-	            </fileset>
-	        </batchtest>
-	    </junit>
+			<formatter type="xml" />
+			<batchtest todir="${test.reports}">
+				<fileset dir="${test.folder}">
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
 	</target>
-	
-	<target name="clean" description="clean up" >
-	<!-- Delete the ${build} and ${dist} directory trees -->
-		<delete dir="${build}"/>
-		<!-- <delete dir="${dist}"/>  -->
-		<delete dir="${test.reports}"/>
+
+	<target name="emma" depends="compile" description="emma code-coverage">
+		<emma enabled="true">
+			<instr instrpath="${class.dir}" destdir="${instrumented.dir}"
+				metadatafile="${coverage.dir}/metadata.emma" merge="true">
+				<filter excludes="au.com.jenisys.view.*" />
+			</instr>
+		</emma>
+
+	</target>
+
+	<target name="emma-report" depends="test" description="report emma">
+		<emma enabled="true">
+			<report sourcepath="${src.dir}">
+				<fileset dir="${coverage.dir}">
+					<include name="*.emma" />
+				</fileset>
+
+				<xml outfile="${coverage.dir}/coverage.xml" depth="method" />
+			</report>
+		</emma>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<!-- <delete dir="${dist}"/> -->
+		<delete dir="${test.reports}" />
 	</target>
 </project>
